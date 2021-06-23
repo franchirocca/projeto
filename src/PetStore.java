@@ -11,10 +11,10 @@ import javax.swing.JOptionPane;
 
 
 public class PetStore {
-	private ArrayList<Mamifero> mamiferos;
+	private ArrayList<Mamifero> animais;
 
 	public PetStore() {
-		this.mamiferos = new ArrayList<Mamifero>();
+		this.animais = new ArrayList<Mamifero>();
 	}
 	public String[] leValores (String [] dadosIn){
 		String [] dadosOut = new String [dadosIn.length];
@@ -67,13 +67,13 @@ public class PetStore {
 		return Integer.parseInt(entrada);
 	}
 
-	public void salvaMamiferos (ArrayList<Mamifero> mamiferos){
+	public void salvaMamiferos (ArrayList<Mamifero> animais){
 		ObjectOutputStream outputStream = null;
 		try {
 			outputStream = new ObjectOutputStream 
 					(new FileOutputStream("c:\\temp\\petStore.dados"));
-			for (int i=0; i < mamiferos.size(); i++)
-				outputStream.writeObject(mamiferos.get(i));
+			for (int i=0; i < animais.size(); i++)
+				outputStream.writeObject(animais.get(i));
 		} catch (FileNotFoundException ex) {
 			JOptionPane.showMessageDialog(null,"Imposs�vel criar arquivo!");
 			ex.printStackTrace();
@@ -156,9 +156,9 @@ public class PetStore {
 				opc2 = this.retornaInteiro(entrada);
 
 				switch (opc2){
-				case 1: mamiferos.add((Mamifero)leCao());
+				case 1: animais.add((Mamifero)leCao());
 				break;
-				case 2: mamiferos.add((Mamifero)leGato());
+				case 2: animais.add((Mamifero)leGato());
 				break;
 				default: 
 					JOptionPane.showMessageDialog(null,"Animal mam�fero para entrada N�O escolhido!");
@@ -166,35 +166,35 @@ public class PetStore {
 
 				break;
 			case 2: // Exibir dados
-				if (mamiferos.size() == 0) {
+				if (animais.size() == 0) {
 					JOptionPane.showMessageDialog(null,"Entre com animais mam�feros primeiramente");
 					break;
 				}
 				String dados = "";
-				for (int i=0; i < mamiferos.size(); i++)	{
-					dados += mamiferos.get(i).toString() + "---------------\n";
+				for (int i = 0; i < animais.size(); i++)	{
+					dados += animais.get(i).toString() + "---------------\n";
 				}
 				JOptionPane.showMessageDialog(null,dados);
 				break;
 			case 3: // Limpar Dados
-				if (mamiferos.size() == 0) {
+				if (animais.size() == 0) {
 					JOptionPane.showMessageDialog(null,"Entre com animais mam�feros primeiramente");
 					break;
 				}
-				mamiferos.clear();
+				animais.clear();
 				JOptionPane.showMessageDialog(null,"Dados LIMPOS com sucesso!");
 				break;
 			case 4: // Grava Dados
-				if (mamiferos.size() == 0) {
+				if (animais.size() == 0) {
 					JOptionPane.showMessageDialog(null,"Entre com animais mam�feros primeiramente");
 					break;
 				}
-				salvaMamiferos(mamiferos);
+				salvaMamiferos(animais);
 				JOptionPane.showMessageDialog(null,"Dados SALVOS com sucesso!");
 				break;
 			case 5: // Recupera Dados
-				mamiferos = recuperaMamiferos();
-				if (mamiferos.size() == 0) {
+				animais = recuperaMamiferos();
+				if (animais.size() == 0) {
 					JOptionPane.showMessageDialog(null,"Sem dados para apresentar.");
 					break;
 				}
